@@ -52,7 +52,7 @@ namespace FlightTickets.PaymentAPI.Services
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
 
-            if (ticket.Price < 1000)
+            if (ticket.Price > 1000)
             {
                 await channel.QueueDeclareAsync(queue: "TicketsApproved",
                                                 durable: false,

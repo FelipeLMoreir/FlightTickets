@@ -1,8 +1,13 @@
+using FlightTickets.PaymentAPI.Services;
+using FlightTickets.PaymentAPI.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddSingleton<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 
