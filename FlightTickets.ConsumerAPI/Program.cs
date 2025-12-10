@@ -1,17 +1,39 @@
-var builder = WebApplication.CreateBuilder(args);
+using FlightTickets.ConsumerAPI.Data;
+using FlightTickets.ConsumerAPI.Repositories;
+using FlightTickets.ConsumerAPI.Repositories.Interfaces;
+using FlightTickets.ConsumerAPI.Services;
+using FlightTickets.ConsumerAPI.Services.Interfaces;
 
-// Add services to the container.
+public partial class Program
+{
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+        // Add services to the container.
 
-var app = builder.Build();
+        builder.Services.AddControllers();
 
-// Configure the HTTP request pipeline.
+        builder.Services.Configure<MongoDBSettings>(
+            builder.Configuration.GetSection("MongoDB"));
 
-app.UseHttpsRedirection();
+        builder.Services.AddSingleton<ConnectionDB>();
 
-app.UseAuthorization();
+        builder.Services.AddSingleton<IConsumerRepository, ConsumerRepository>();
 
-app.MapControllers();
+        builder.Services.AddSingleton<IConsumerService, ConsumerService>();
+        
 
-app.Run();
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
+    }
+}
