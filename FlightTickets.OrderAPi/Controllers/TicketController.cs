@@ -1,6 +1,5 @@
 ﻿using FlightTickets.Models.DTOs;
 using FlightTickets.OrderAPi.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightTickets.OrderAPi.Controllers
