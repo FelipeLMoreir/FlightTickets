@@ -4,16 +4,17 @@ using FlightTickets.PaymentAPI.Services;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using System.Reflection;
+using ZstdSharp.Unsafe;
 
 namespace FlightTickets.Tests.Services.PaymentServices
 {
-    public class PaymentServiceTests
+    public class PaymentServiceTest
     {
         private readonly ILogger<PaymentService> _logger;
         private readonly PaymentService _paymentService;
         private readonly Faker<Ticket> _ticketFaker;
 
-        public PaymentServiceTests()
+        public PaymentServiceTest()
         {
             using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
             _logger = loggerFactory.CreateLogger<PaymentService>();
@@ -40,7 +41,7 @@ namespace FlightTickets.Tests.Services.PaymentServices
             await InvokeValidatePaymentTicketAsync(ticket);
 
             //assert
-            string actualQueue = price < 1000 ? "TicketsApproved" : "TicketsDenied";
+            string actualQueue = price > 1000 ? "TicketsApproved" : "TicketsDenied";
             Assert.Equal(queue, actualQueue);
         }
 
@@ -56,11 +57,11 @@ namespace FlightTickets.Tests.Services.PaymentServices
 
         private async Task InvokeValidatePaymentTicketAsync(Ticket ticket)
         {
-            var method = typeof(PaymentService)
-                .GetMethod("ValidatePaymentTicket",
+            var method = typeof(PaymentService).GetMethod("ValidatePaymentTicket",
                     BindingFlags.NonPublic | BindingFlags.Instance)!;
 
             await (Task)method.Invoke(_paymentService, new object?[] { ticket })!;
         }
+
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FlightTickets.Tests.Controllers.PaymentControllerTests
 {
-    public class PaymentControllerTests
+    public class PaymentControllerTest
     {
         private readonly ILogger<PaymentController> _logger;
                 
@@ -13,7 +13,7 @@ namespace FlightTickets.Tests.Controllers.PaymentControllerTests
                 
         private readonly PaymentController _paymentController;
 
-        public PaymentControllerTests()
+        public PaymentControllerTest()
         {
             _logger = new LoggerFactory().CreateLogger<PaymentController>();
             _paymentService = new PaymentService();

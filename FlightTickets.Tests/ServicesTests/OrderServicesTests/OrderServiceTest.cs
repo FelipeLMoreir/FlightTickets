@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 
 namespace FlightTickets.Tests.Services.OrderServices
 {
-    public class OrderServiceTests
+    public class OrderServiceTest
     {
         private readonly ITicketService _ticketService;
         private readonly ILogger<TicketService> _logger;
         private readonly Faker<TicketRequestDTO> _ticketRequestFaker;
 
-        public OrderServiceTests()
+        public OrderServiceTest()
         {
             _logger = new LoggerFactory().CreateLogger<TicketService>();
             _ticketService = new TicketService();

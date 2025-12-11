@@ -102,5 +102,6 @@ namespace FlightTickets.ConsumerAPI.Services
                 _logger.LogError(ex, "An error occurred while saving denied ticket to the collection");
             }
         }
+
     }
 }

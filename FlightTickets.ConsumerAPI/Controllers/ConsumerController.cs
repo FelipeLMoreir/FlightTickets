@@ -1,17 +1,16 @@
 ﻿using FlightTickets.ConsumerAPI.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightTickets.ConsumerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Consumercontroller : ControllerBase
+    public class ConsumerController : ControllerBase
     {
-        private readonly ILogger<Consumercontroller> _logger;
+        private readonly ILogger<ConsumerController> _logger;
         private readonly IConsumerService _consumerService;
 
-        public Consumercontroller(ILogger<Consumercontroller> logger, IConsumerService consumerService)
+        public ConsumerController(ILogger<ConsumerController> logger, IConsumerService consumerService)
         {
             _logger = logger;
             _consumerService = consumerService;
